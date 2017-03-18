@@ -148,6 +148,6 @@ document.getElementById("search").addEventListener("click", function(){
 		if(intervalCalls > (document.getElementById("time") || 100)) {
 			window.clearInterval(interval);
 		}
-	}, 1000);
+	}, 100);
 });
 });
