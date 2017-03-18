@@ -3,8 +3,14 @@ var url = "https://api.spotify.com/v1/search?q={name}&type=artist";
 var relatedArtist = "https://api.spotify.com/v1/artists/{id}/related-artists"
 var artistOne = "Death Cab";
 var artistTwo = "Vince Staples";
+var client_id = 'c74abf6303b640baa44637b8eba0bec3'; // Your client id
+var client_secret = 'ebb84c0c7c594a70a8df6eacbffba551'; // Your secret
+var redirect_uri = "loggedIn.html";
+var scopes = 'user-read-private user-read-email'
 var artistIdOne; 
-var maxRelated = 3;
+var maxRelated = 5;
+var progressBar = document.getElementById("myBar");
+var defaultIterations = 100;
 
 var queueNewArtistsOne = [];
 //var queueNewArtistsTwo = [];
@@ -21,7 +27,6 @@ function processQueue(queue, graph) {
 					id:    newArtistId,
 				});
 			}
-			console.log(graph)
 		});
 		getRelatedArtists(newArtistId, function (relatedArtists) {
 			if (relatedArtists !== undefined) {
@@ -33,7 +38,6 @@ function processQueue(queue, graph) {
 					})
 					queue.push(relatedArtist.id);
 				}
-				console.log(graph);
 			}
 		});
 	}
@@ -47,7 +51,6 @@ function getIdFromName(name, callback) {
 	ajax.send(null);
 	ajax.onload = function() {
 		var data = JSON.parse(ajax.responseText).artists.items[0].id;
-		console.log(data);
 		callback(data);
 	}
 }
@@ -107,8 +110,6 @@ function addNodesAndEdges(graph, nodes, edges) {
 		});
 		var artistAndRelated = graph[id];
 		for (var relatedId in artistAndRelated.related) {
-			// console.log(artistAndRelated.related);
-			// console.log(relatedId);
 			edges.push({
 				from: id,
 				to:   relatedId,
@@ -145,7 +146,11 @@ document.getElementById("search").addEventListener("click", function(){
 		processQueue(queueNewArtistsOne, dataSet); 
 		intervalCalls++;
 
-		if(intervalCalls > (document.getElementById("time") || 100)) {
+        var width = Math.ceil(intervalCalls / (document.getElementById("iterations").value || defaultIterations) * 100);
+        console.log(width);
+        progressBar.style.width = width + '%';
+
+		if(intervalCalls > (document.getElementById("iterations").value || defaultIterations)) {
 			window.clearInterval(interval);
 		}
 	}, 100);

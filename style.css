@@ -3,3 +3,13 @@
     height: 400px;
     border: 1px solid lightgray;
 }
+
+#myProgress {
+    width: 600px;
+    background-color: grey;
+}
+#myBar {
+    width: 1%;
+    height: 30px;
+    background-color: green;
+}
