@@ -145,7 +145,7 @@ document.getElementById("search").addEventListener("click", function(){
 		processQueue(queueNewArtistsOne, dataSet); 
 		intervalCalls++;
 
-		if(intervalCalls > (document.getElementById("time") || 100) {
+		if(intervalCalls > (document.getElementById("time") || 100)) {
 			window.clearInterval(interval);
 		}
 	}, 1000);
