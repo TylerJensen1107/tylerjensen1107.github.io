@@ -1,0 +1,31 @@
+<html>
+<head>
+	<title>Visualizer</title>
+</head>
+<body>
+
+  <audio id="music" src="test2.mp3"></audio>
+  <form>
+  	<input type="text" id="xRot" placeholder="X Rotation">
+  	<input type="text" id="yRot" placeholder="Y Rotation">
+  	<input type="text" id="zRot" placeholder="Z Rotation">
+  	<input type="text" id="Shape" placeholder="Shape (Between 0 and 3.14)">
+  	<input type="text" id="Tightness" placeholder="Tightness">
+  	<input type="text" id="Delete" placeholder="Delete as you go">
+  	<input type="text" id="CounterMax" placeholder="Time (Default 1000)">
+  	<input type="text" id="Sync" placeholder="Sync to Music">
+  	<input type="button" id="start" value="Start!">
+  	<input type="button" id="newShape" value="newShape">
+    <input type="button" id="refresh" value="refresh">
+  </form>
+
+  <form action="process.php" method="post" enctype="multipart/form-data">
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload" name="submit">
+  </form>
+   
+
+</body>
+<script type="text/javascript" src="three.min.js"></script>
+<script type="text/javascript" src="flatLand.js"></script>
+</html>
